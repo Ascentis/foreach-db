@@ -1,0 +1,5 @@
+SELECT (ROW_NUMBER() OVER (ORDER BY NAME) - 1) % {parallelLevel} BUCKET, 
+	NAME AS DBNAME, 
+	'vm-pc-sql02' SERVERNAME
+FROM sys.databases
+WHERE NAME LIKE 'AAAA%'
