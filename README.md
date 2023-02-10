@@ -6,6 +6,16 @@ This module allows the user to:
 * Execute scripts that produce an output. Multiple formats are supported
 * Select data from each database processed and "pump" it to a single target table
 
+# Repository Cloning
+
+Please notice that this repository uses ```git LFS``` in order to store side by side two key dependencies:
+- SqlServer
+- PSWriteColor
+
+You must have ```git LFS``` installed and properly initialized for these packages to be properly cloned
+
+The reason why these dependencies are stored side-by-side is to easily support "local install" of this package in machines with no connection to the internet. In that case, simply clone this repository into a machine with access and move all the files to the machine with no access and use the Local-Install.ps1 script
+
 # Documentation
 
 ## SYNOPSIS
