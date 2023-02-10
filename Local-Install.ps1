@@ -7,18 +7,19 @@ Copy-Item .\ForEach-DB.psd1 ${env:ProgramFiles}\WindowsPowerShell\Modules\ForEac
 
 $pathExists = Test-Path -Path ${env:ProgramFiles}\WindowsPowerShell\Modules\PSWriteColor
 if ($pathExists) {
-	Write-Output "PSWriteColor PowerShell package already installed"
+	Write-Output "	PSWriteColor PowerShell package already installed - Skipping expand archive operation"
 } else {
 	Expand-Archive .\deps\PSWriteColor.zip ${env:ProgramFiles}\WindowsPowerShell\Modules\ -Force
 }
 
 $pathExists = Test-Path -Path ${env:ProgramFiles}\WindowsPowerShell\Modules\SqlServer
 if ($pathExists) {
-	Write-Output "SqlServer PowerShell package already installed"
+	Write-Output "	SqlServer PowerShell package already installed - Skipping expand archive operation"
 } else {
 	Expand-Archive .\deps\SqlServer.zip ${env:ProgramFiles}\WindowsPowerShell\Modules\ -Force
 }
 
+$ErrorActionPreference = 'SilentlyContinue'
 try {
     remove-module -Name foreach-db
 } catch {
@@ -26,6 +27,7 @@ try {
         throw
     }
 }
+$ErrorActionPreference = 'Continue'
 
 import-module PSWriteColor -DisableNameChecking
 import-module SqlServer -DisableNameChecking
